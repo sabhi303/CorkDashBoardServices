@@ -3,7 +3,7 @@ from weather.routes import weather_bp
 from transport.routes import transport_bp
 from environment.routes import environment_bp
 from apscheduler.schedulers.background import BackgroundScheduler
-from datetime import datetime
+from datetime import datetime, timedelta
 import requests
 import json
 import logging
@@ -54,7 +54,13 @@ def start_scheduler():
     # Set up jobs based on config
     for api in config['apis']:
         interval = {time_units[api['unit']]: api['interval']}
-        scheduler.add_job(func=create_job(api), trigger="interval", **interval)
+        # Schedule the job with an initial delay of 15 seconds
+        scheduler.add_job(
+            func=create_job(api),
+            trigger='interval',
+            **interval,
+            start_date=datetime.now() + timedelta(seconds=15)  # Initial delay of 15 seconds
+        )
     scheduler.start()
 
 # Shut down the scheduler when exiting the app

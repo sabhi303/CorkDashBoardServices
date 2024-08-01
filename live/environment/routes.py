@@ -36,7 +36,7 @@ def store_water_level_data():
         }
 
         # Print the filtered data for debugging
-        logging.debug("Filtered GeoJSON Data:\n" + str(filtered_geojson))
+        # logging.debug("Filtered GeoJSON Data:\n" + str(filtered_geojson))
 
         # Get the database connection
         db = get_database()

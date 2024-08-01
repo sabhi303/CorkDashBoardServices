@@ -21,7 +21,7 @@ def store_weather_data():
         xml_data = response.text
 
         # Print the full XML data for debugging
-        logging.debug("Full XML Data:\n" + xml_data)
+        # logging.debug("Full XML Data:\n" + xml_data)
 
         # Parse the XML data
         root = ET.fromstring(xml_data)
@@ -30,7 +30,7 @@ def store_weather_data():
         observations_element = root
 
         # Print the <observations> element and its attributes for debugging
-        logging.debug(f"<observations> tag: {observations_element.tag}, attributes: {observations_element.attrib}")
+        # logging.debug(f"<observations> tag: {observations_element.tag}, attributes: {observations_element.attrib}")
 
         # Filter child <station> elements for Cork
         filtered_stations = []
@@ -48,7 +48,7 @@ def store_weather_data():
         filtered_xml_data = ET.tostring(filtered_observations, encoding='unicode')
 
         # Print the filtered XML data for debugging
-        logging.debug("Filtered XML Data:\n" + filtered_xml_data)
+        # logging.debug("Filtered XML Data:\n" + filtered_xml_data)
 
         # Get the database connection
         db = get_database()
