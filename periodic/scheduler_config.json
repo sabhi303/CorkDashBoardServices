@@ -1,0 +1,19 @@
+{
+    "apis": [
+        {
+            "url": "/housing/housing",
+            "interval": 90,
+            "unit": "days"
+        },
+        {
+            "url": "/transport/airport_passengers",
+            "interval": 30,
+            "unit": "days"
+        },
+        {
+            "url": "/economy/employment",
+            "interval": 90,
+            "unit": "days"
+        }
+    ]
+}
