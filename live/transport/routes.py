@@ -20,7 +20,7 @@ def store_csv_data():
         csv_data = response.text
 
         # Print the CSV data
-        logging.debug("CSV Data:\n" + csv_data)
+        # logging.debug("CSV Data:\n" + csv_data)
 
         # Get the database connection
         db = get_database()

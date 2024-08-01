@@ -1,0 +1,19 @@
+{
+    "apis": [
+        {
+            "url": "/weather/weather_data",
+            "interval": 15,
+            "unit": "minutes"
+        },
+        {
+            "url": "/transport/car_parks",
+            "interval": 30,
+            "unit": "seconds"
+        },
+        {
+            "url": "/environment/water_levels",
+            "interval": 1,
+            "unit": "minutes"
+        }
+    ]
+}
