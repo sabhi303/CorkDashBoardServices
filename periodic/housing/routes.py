@@ -73,7 +73,11 @@ def store_json_data():
         collection = db['data_themes_housing']
 
         # Store the JSON data as a single document
-        collection.insert_one({"data": combined_json})
+        collection.update_one(
+            {},
+            {"$set": {"data": combined_json}},  # Update operation
+            upsert=True  # Insert document if no matching document is found
+        )
 
         logging.debug('JSON data stored in the database.')
 

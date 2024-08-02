@@ -24,8 +24,12 @@ def store_transport_data():
         db = get_database()
         collection = db['data_themes_transport']
 
-        # Store the JSON data as a single document
-        collection.insert_one({"data": json_data})
+        # Update or Store the JSON data as a single document
+        collection.update_one(
+            {},
+            {"$set": {"data": json_data}},  # Update operation
+            upsert=True  # Insert document if no matching document is found
+        )
 
         logging.debug('Transport data stored in the database.')
 

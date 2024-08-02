@@ -69,6 +69,11 @@ def store_transport_data():
 
         # Store the JSON data as a single document
         collection.insert_one({"data": json_data})
+        collection.update_one(
+            {},
+            {"$set": {"data": json_data}},  # Update operation
+            upsert=True  # Insert document if no matching document is found
+        )
 
         logging.debug('Economy data stored in the database.')
 
