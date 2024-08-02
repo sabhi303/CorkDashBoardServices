@@ -1,0 +1,9 @@
+{
+    "apis": [
+        {
+            "url": "/demographics/cork_population",
+            "interval": 360,
+            "unit": "days"
+        }
+    ]
+}
