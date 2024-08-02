@@ -61,8 +61,12 @@ def store_cork_population_data():
         db = get_database()
         collection = db['data_themes_demographics_population']
 
-        # Store the JSON data as a single document
-        collection.insert_one(cork_data)
+        # Update & Store the JSON data as a single document
+        collection.update_one(
+            {},
+            {"$set": {"Cork": cork_data}},  # Update operation
+            upsert=True  # Insert document if no matching document is found
+        )
 
         logging.debug('Cork population data stored in the database.')
 
