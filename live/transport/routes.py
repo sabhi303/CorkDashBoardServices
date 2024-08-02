@@ -26,8 +26,12 @@ def store_csv_data():
         db = get_database()
         collection = db['data_transport_car_parks']
 
-        # Store the CSV data as a single document
-        collection.insert_one({"csv_data": csv_data})
+        # Update or Store the CSV data as a single document
+        collection.update_one(
+            {},
+            {"$set": {"csv_data": csv_data}},  # Update operation
+            upsert=True  # Insert document if no matching document is found
+        )
 
         logging.debug('CSV data stored in the database.')
 

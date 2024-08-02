@@ -42,8 +42,12 @@ def store_water_level_data():
         db = get_database()
         collection = db['data_environment_water_levels']
 
-        # Store the filtered GeoJSON data as a single document
-        collection.insert_one({"water_levels": filtered_geojson})
+        # Update or store the filtered GeoJSON data as a single document
+        collection.update_one(
+            {},
+            {"$set": {"water_levels": filtered_geojson}},  # Update operation
+            upsert=True  # Insert document if no matching document is found
+        )
 
         logging.debug('Filtered water level data stored in the database.')
 

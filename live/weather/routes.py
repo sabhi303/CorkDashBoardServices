@@ -54,8 +54,12 @@ def store_weather_data():
         db = get_database()
         collection = db['data_weather']
 
-        # Store the filtered XML data as a single document
-        collection.insert_one({"weather_data": filtered_xml_data})
+        # Update or Store the filtered XML data as a single document
+        collection.update_one(
+            {},
+            {"$set": {"weather_data": filtered_xml_data}},  # Update operation
+            upsert=True  # Insert document if no matching document is found
+        )
 
         logging.debug('Filtered weather data stored in the database.')
 
