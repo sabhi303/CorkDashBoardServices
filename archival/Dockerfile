@@ -12,4 +12,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire project directory into the container at /app
 COPY . .
 
+# Ensure the .env file is copied
+COPY .env .env
+
+# Export environment variables from the .env file (optional during build)
+# RUN export $(cat .env | xargs)
+
 CMD ["python", "main.py"]
