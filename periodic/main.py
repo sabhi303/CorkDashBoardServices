@@ -66,12 +66,8 @@ def start_scheduler():
         # create_job(api)()
     scheduler.start()
 
-def shutdown_scheduler():
-    if scheduler.running:
-        scheduler.shutdown()
-
 # Register the shutdown function to be called on exit
-atexit.register(shutdown_scheduler)
+atexit.register(lambda: scheduler.shutdown())
 
 def initialize_app():
     # Connect to the database

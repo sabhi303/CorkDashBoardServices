@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: liveservice
+  labels:
+    app: liveservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: liveservice
+  template:
+    metadata:
+      labels:
+        app: liveservice
+    spec:
+      hostNetwork: false
+      containers:
+      - name: liveservice-container
+        image: docker.io/library/corkdashboardliveservice:1.0
+        imagePullPolicy: Never
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: MONGODB_URL
+          value: "mongodb://host.docker.internal:27017/"
+        - name: DB_NAME
+          value: "CorkDashboard"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: periodicservice
+  labels:
+    app: periodicservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: periodicservice
+  template:
+    metadata:
+      labels:
+        app: periodicservice
+    spec:
+      hostNetwork: false
+      containers:
+      - name: periodicservice-container
+        image: docker.io/library/corkdashboardperiodicservice:1.0
+        imagePullPolicy: Never
+        env:
+        - name: MONGODB_URL
+          value: "mongodb://host.docker.internal:27017/"
+        - name: DB_NAME
+          value: "CorkDashboard"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: archivalservice
+  labels:
+    app: archivalservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: archivalservice
+  template:
+    metadata:
+      labels:
+        app: archivalservice
+    spec:
+      hostNetwork: false
+      containers:
+      - name: archivalservice-container
+        image: docker.io/library/corkdashboardarchivalservice:1.0
+        imagePullPolicy: Never
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: MONGODB_URL
+          value: "mongodb://host.docker.internal:27017/"
+        - name: DB_NAME
+          value: "CorkDashboard"

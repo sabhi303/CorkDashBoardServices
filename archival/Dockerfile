@@ -16,6 +16,6 @@ COPY . .
 COPY .env .env
 
 # Export environment variables from the .env file (optional during build)
-# RUN export $(cat .env | xargs)
+RUN export $(cat .env | xargs)
 
 CMD ["python", "main.py"]
